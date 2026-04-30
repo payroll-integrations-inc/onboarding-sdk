@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import { bootstrap } from "./main";
-import { DEFAULT_HOST_ELEMENT_ID, MESSAGE_SOURCE } from "./constants";
+import { DEFAULT_HOST_ELEMENT_ID } from "./constants";
 import type { BootstrapConfig } from "./interfaces";
 
 function config(overrides?: Partial<BootstrapConfig>): BootstrapConfig {
