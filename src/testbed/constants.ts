@@ -1,0 +1,15 @@
+export const ENVIRONMENTS = {
+  local: "http://localhost:4201",
+  qa: "https://qa.secure.payrollintegrationsdemo.com",
+  test1: "https://test1.secure.payrollintegrationsdemo.com",
+  dev: "https://dev.secure.payrollintegrationsdemo.com",
+  dev2: "https://dev2.secure.payrollintegrationsdemo.com",
+  dev3: "https://dev3.secure.payrollintegrationsdemo.com",
+  dev4: "https://dev4.secure.payrollintegrationsdemo.com",
+  dev5: "https://dev5.secure.payrollintegrationsdemo.com",
+  dev6: "https://dev6.secure.payrollintegrationsdemo.com",
+  demo1: "https://demo1.secure.payrollintegrationsdemo.com",
+  demo2: "https://demo2.secure.payrollintegrationsdemo.com",
+  demo3: "https://demo3.secure.payrollintegrationsdemo.com",
+  prod: "https://secure.payrollintegrationsapp.com",
+} as const;
