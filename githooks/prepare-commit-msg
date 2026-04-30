@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# DEPRECATED: This hook adds ticket IDs to commit messages but does not follow conventional commits format.
+# Consider using conventional commits format instead: "feat: description" or "fix: description"
+# See .claude/context/conventional-commits.md for proper formatting guidelines.
+
+# This hook works for branches named such as "pi-1234"
+
+# get current branch
+branchName=$(git rev-parse --abbrev-ref HEAD)
+
+# search ticket id in the branch name
+issueId=$(echo $branchName | sed -nE 's,([A-Za-z]+-[0-9]+).*,\1,p')
+
+# only prepare commit message if pattern matched and issue id was found
+if [[ ! -z $issueId ]]; then
+    # $1 is the name of the file containing the commit message
+
+    # check if the commit message doesn't already start with the issue ID
+    if [ "$(sed -nE "1s/^$issueId : //p" "$1")" = "" ]; then
+        echo -e "$issueId : ""$(cat $1)" > "$1"
+    fi
+fi
