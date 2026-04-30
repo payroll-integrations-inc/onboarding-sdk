@@ -6,14 +6,18 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.2.4",
     "@types/node": "^25.6.0",
+    "@vitest/coverage-v8": "^4.1.5",
     "daisyui": "^5.5.19",
+    "jsdom": "^29.1.1",
     "tailwindcss": "^4.2.4",
     "typescript": "~6.0.2",
-    "vite": "^8.0.10"
+    "vite": "^8.0.10",
+    "vitest": "^4.1.5"
   }
 }

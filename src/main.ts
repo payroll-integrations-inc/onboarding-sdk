@@ -1,4 +1,8 @@
-import { DEFAULT_ONBOARDING_HOST, MESSAGE_SOURCE } from "./constants";
+import {
+  DEFAULT_HOST_ELEMENT_SELECTOR,
+  DEFAULT_ONBOARDING_HOST,
+  MESSAGE_SOURCE,
+} from "./constants";
 import type { SdkMessage, BootstrapConfig, SdkMessageData } from "./interfaces";
 
 function getFrameSrc(host: string) {
@@ -25,7 +29,7 @@ function handleMessage(message: MessageEvent) {
 export function bootstrap(config: BootstrapConfig) {
   const {
     token,
-    selector = "#pi-host",
+    selector = DEFAULT_HOST_ELEMENT_SELECTOR,
     frameHost = DEFAULT_ONBOARDING_HOST,
     frameStyle = {},
     callbacks,
@@ -35,6 +39,10 @@ export function bootstrap(config: BootstrapConfig) {
     window.__PAYROLL_INTEGRATIONS__ = {};
   }
   window.__PAYROLL_INTEGRATIONS__.callbacks = callbacks;
+
+  if (!token) {
+    throw new Error(`The token parameter is required!`);
+  }
 
   const host = document.querySelector<HTMLElement>(selector);
 
