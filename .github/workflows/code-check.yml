@@ -1,0 +1,58 @@
+name: Code Check
+
+on:
+    # Run on direct pushes to main branches
+    push:
+        branches:
+            - main
+            - staging
+            - hotfix
+            - development
+    # Run on all pull requests
+    pull_request:
+        branches:
+            - '**'
+    # Run on merge queue (gh-readonly-queue/* branches)
+    merge_group:
+        types: [checks_requested]
+    # Run when triggered by base-branch-monitor for PR re-checks
+    repository_dispatch:
+        types: [code-check-pr]
+    # Allow manual triggering with optional PR number and git reference
+    workflow_dispatch:
+        inputs:
+            pr-number:
+                description: 'PR number to check (for manual runs)'
+                required: false
+                type: string
+
+# Ensure only one code check runs per PR/branch at a time
+concurrency:
+    group: code-check-${{ github.ref }}
+    cancel-in-progress: true
+
+permissions:
+    contents: read
+    packages: read
+
+# WARNING: If you add/remove/rename jobs below, you MUST update the merge queue ruleset!
+# The "Merge Queue Branches" ruleset requires all these checks individually:
+# - Root / Build, Root / Lint, Root / Test, Root / Shell Test, Root / Catalog Validation
+# - UI / Build, UI / Lint, UI / Test
+# - Onboarding UI / Build, Onboarding UI / Lint, Onboarding UI / Test
+# Update ruleset: gh api repos/payroll-integrations-inc/pi/rulesets/11876360 --method PUT
+# Or use GitHub UI: Settings → Rules → Rulesets → "Merge Queue Branches" → Edit
+jobs:
+    build:
+        name: Build
+        uses: './.github/workflows/pnpm-run-script.yml'
+        with:
+            name: Build
+            command: build
+
+    test:
+        name: Test
+        uses: './.github/workflows/pnpm-run-script.yml'
+        with:
+            name: Test
+            command: test
