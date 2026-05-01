@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vite-project</title>
+    <link rel="stylesheet" href="./src/style.css">
+  </head>
+  <body class="p-6">
+    <div class="mb-4 flex flex-col gap-2">
+      <h1 class="text-2xl">Onboarding SDK Testbed</h1>
+      <fieldset class="fieldset bg-base-200 border-base-300 rounded-box border p-4">
+        <legend class="fieldset-legend">Bootstrap Config</legend>
+        <label for="environment" class="label">Environment</label>
+        <select id="environment" class="select">
+          <option value="local">Local</option>
+          <option value="qa">QA</option>
+          <option value="test1">Test 1</option>
+          <option value="dev">Dev</option>
+          <option value="dev2">Dev 2</option>
+          <option value="dev3">Dev 3</option>
+          <option value="dev4">Dev 4</option>
+          <option value="dev5">Dev 5</option>
+          <option value="dev6">Dev 6</option>
+          <option value="demo1">Demo 1</option>
+          <option value="demo2">Demo 2</option>
+          <option value="demo3">Demo 3</option>
+          <option value="prod">Production</option>
+        </select>
+        <label for="token" class="label">Token</label>
+        <input type="text" id="token" class="input"/>
+      </fieldset>
+      <button id="bootstrap-btn" type="button" class="btn btn-accent">Bootstrap</button>
+    </div>
+    <div class="flex gap-4">
+      <div id="pi-host"></div>
+      <ul id="messages"></ul>
+    </div>
+    <script type="module">
+      import { bootstrap } from './src/main.js';
+      import { ENVIRONMENTS } from './src/testbed/constants.js';
+
+      const bootstrapButton = document.querySelector('#bootstrap-btn');
+      const environment = document.querySelector('#environment');
+      const tokenInput = document.querySelector('#token');
+      const messages = document.querySelector('#messages');
+
+      function handleOutgoingMessage(data, source = 'client') {
+        if (data?.source === 'pi-sdk') {
+          const newMessageEl = document.createElement('li');
+          newMessageEl.classList.add('flex', 'flex-col', 'gap-2', 'p-2');
+          if (source === 'client') {
+            newMessageEl.classList.add('bg-secondary/20');
+          } else {
+            newMessageEl.classList.add('bg-primary/20');
+          }
+          const messageSource = document.createElement('span');
+          messageSource.innerText = `Source: ${source}`;
+          const messageValue = document.createElement('pre');
+          messageValue.classList.add('font-mono');
+          messageValue.innerText = JSON.stringify(data, undefined, 2);
+          newMessageEl.appendChild(messageSource);
+          newMessageEl.appendChild(messageValue);
+          messages.appendChild(newMessageEl);
+        }
+      }
+
+      function handleIncomingMessage(event) {
+        const data = event?.data;
+        handleOutgoingMessage(data, 'server');
+      }
+
+      function doBootstrap() {
+        const frameHost = ENVIRONMENTS[environment.value];
+        bootstrap({token: tokenInput.value, frameHost, callbacks: {message: handleOutgoingMessage,} });
+      }
+
+      window.addEventListener('message', handleIncomingMessage)
+      bootstrapButton.addEventListener('click', doBootstrap)
+    </script>
+  </body>
+</html>

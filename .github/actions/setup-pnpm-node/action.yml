@@ -1,0 +1,30 @@
+name: 'Setup pnpm and Node.js'
+description: 'Install pnpm using packageManager field and setup Node.js with dependency caching'
+
+inputs:
+    node-version-file:
+        description: 'Path to package.json for node version (default: package.json)'
+        required: false
+        default: 'package.json'
+
+runs:
+    using: 'composite'
+    steps:
+        - name: Setup pnpm
+          uses: pnpm/action-setup@v4
+          # Version is read from packageManager field in package.json
+          # This enables corepack and installs the exact pnpm version specified
+
+        - name: Setup Node.js
+          uses: actions/setup-node@v4
+          with:
+              node-version-file: ${{ inputs.node-version-file }}
+              cache: 'pnpm'
+              cache-dependency-path: 'pnpm-lock.yaml'
+              # Caching mechanism:
+              # - cache: 'pnpm' enables automatic caching of pnpm store (~/.pnpm-store)
+              # - cache-dependency-path: Uses pnpm-lock.yaml hash for cache key
+              # - Cache key format: setup-node-{platform}-pnpm-{hash(pnpm-lock.yaml)}
+              # - On cache hit: Restores pnpm store, significantly speeds up pnpm install
+              # - On cache miss: Downloads packages, then caches store for future runs
+              # Verification: Check workflow logs for "Cache restored from key:" message

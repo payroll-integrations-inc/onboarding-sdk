@@ -1,0 +1,33 @@
+on:
+    workflow_call:
+        inputs:
+            command:
+                required: true
+                type: string
+            name:
+                type: string
+            path:
+                default: '.'
+                type: string
+            runs-on:
+                default: 'ubuntu-latest'
+                type: string
+
+env:
+    NODE_OPTIONS: '--max-old-space-size=6144' # ubuntu-latest runners have 8GB memory total
+
+jobs:
+    pnpm-run-script:
+        name: ${{ inputs.name || inputs.command }}
+        runs-on: ${{ inputs.runs-on }}
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 1
+            - name: Setup pnpm and Node.js
+              uses: ./.github/actions/setup-pnpm-node
+              with:
+                  node-version-file: ${{ inputs.path }}/package.json
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+            - run: pnpm --prefix ${{ inputs.path }} run ${{ inputs.command }}
