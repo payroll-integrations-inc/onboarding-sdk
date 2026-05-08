@@ -5,7 +5,7 @@ import type { BootstrapConfig } from "./interfaces";
 
 function config(overrides?: Partial<BootstrapConfig>): BootstrapConfig {
   return {
-    onboardingUrl: "mock-token",
+    onboardingUrl: "http://mock-token-url.example.com?token=mock-token",
     frameHost: "http://localhost:4201",
     ...overrides,
   };
@@ -29,7 +29,7 @@ describe("bootstrap", () => {
       throw new Error("THIS SHOULD HAVE THROWN");
     } catch (err) {
       expect(
-        (err as Error).message.includes("token parameter is required"),
+        (err as Error).message.includes("onboardingUrl parameter is required"),
       ).toBeTruthy();
     }
   });
