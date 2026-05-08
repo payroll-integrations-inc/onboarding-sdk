@@ -5,7 +5,7 @@ import type { BootstrapConfig } from "./interfaces";
 
 function config(overrides?: Partial<BootstrapConfig>): BootstrapConfig {
   return {
-    token: "mock-token",
+    onboardingUrl: "mock-token",
     frameHost: "http://localhost:4201",
     ...overrides,
   };
@@ -34,7 +34,7 @@ describe("bootstrap", () => {
 
   test("errors if no token is provided, or is empty", () => {
     try {
-      bootstrap(config({ token: "" }));
+      bootstrap(config({ onboardingUrl: "" }));
       throw new Error("THIS SHOULD HAVE THROWN");
     } catch (err) {
       expect(
