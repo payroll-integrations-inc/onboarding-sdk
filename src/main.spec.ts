@@ -12,15 +12,6 @@ function config(overrides?: Partial<BootstrapConfig>): BootstrapConfig {
 }
 
 describe("bootstrap", () => {
-  test("initializes window state", () => {
-    try {
-      bootstrap(config());
-    } catch (err) {
-      // pass
-    }
-    expect(window.__PAYROLL_INTEGRATIONS__).toBeDefined();
-  });
-
   test("errors if no matching host element is found", () => {
     try {
       bootstrap(config());

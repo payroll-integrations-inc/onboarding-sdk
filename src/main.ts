@@ -58,7 +58,6 @@ export function bootstrap(config: BootstrapConfig) {
     onboardingUrl,
     selector = DEFAULT_HOST_ELEMENT_SELECTOR,
     frameHost = DEFAULT_ONBOARDING_HOST,
-    frameStyle = {},
     callbacks,
   } = config;
 
@@ -104,15 +103,13 @@ export function bootstrap(config: BootstrapConfig) {
   host.replaceChildren();
 
   // Create our iframe
-  const height = `${frameStyle.heightPx ?? 600}px`;
-  const width = `${frameStyle.widthPx ?? 420}px`;
   const iframe = document.createElement("iframe");
   iframe.src = getFrameSrc(frameHost);
   iframe.frameBorder = "0";
-  iframe.style.zIndex = frameStyle.zIndex ?? "900";
-  iframe.style.height = height;
-  iframe.style.width = width;
-  iframe.style.border = frameStyle.border ?? "none";
+  iframe.style.zIndex = "900";
+  iframe.style.height = "600px";
+  iframe.style.width = "420px";
+  iframe.style.border = "none";
   iframe.allow = "clipboard-write; clipboard-read";
   iframe.onload = () => {
     // Send token to pi app

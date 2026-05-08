@@ -19,15 +19,6 @@ export interface BootstrapConfig {
    * https://secure.payrollintegrationsapp.com
    */
   frameHost?: string;
-  /**
-   * Override the default frame style
-   */
-  frameStyle?: {
-    zIndex?: string;
-    heightPx?: number;
-    widthPx?: number;
-    border?: string;
-  };
 }
 
 export interface SdkState {
