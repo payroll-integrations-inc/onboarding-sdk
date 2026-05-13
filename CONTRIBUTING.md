@@ -15,7 +15,7 @@ cd onboarding-sdk
 pnpm install
 ```
 
-## Development
+## Development & Testing
 
 Start the dev server to run the testbed app in your browser:
 
@@ -25,9 +25,16 @@ pnpm dev
 
 The testbed app lets you exercise the SDK against any backend environment. The available environments are defined in [src/testbed/constants.ts](src/testbed/constants.ts) and include local, qa, dev, demo, and prod targets.
 
-## Testing
+To test onboarding:
 
-Tests use [Vitest](https://vitest.dev/) with a jsdom environment. Coverage is collected automatically.
+1. Open the application at `http://localhost:5173/`
+2. In the environment dropdown, select the environment you are testing against
+3. In the URL field, paste a valid onboarding URL with its token parameter
+4. Click `Bootstrap`
+
+## Automated Tests
+
+Automated tests use [Vitest](https://vitest.dev/) with a jsdom environment. Coverage is collected automatically.
 
 ```bash
 pnpm test
