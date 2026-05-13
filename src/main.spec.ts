@@ -5,22 +5,13 @@ import type { BootstrapConfig } from "./interfaces";
 
 function config(overrides?: Partial<BootstrapConfig>): BootstrapConfig {
   return {
-    token: "mock-token",
+    onboardingUrl: "http://mock-token-url.example.com?token=mock-token",
     frameHost: "http://localhost:4201",
     ...overrides,
   };
 }
 
 describe("bootstrap", () => {
-  test("initializes window state", () => {
-    try {
-      bootstrap(config());
-    } catch (err) {
-      // pass
-    }
-    expect(window.__PAYROLL_INTEGRATIONS__).toBeDefined();
-  });
-
   test("errors if no matching host element is found", () => {
     try {
       bootstrap(config());
@@ -34,11 +25,11 @@ describe("bootstrap", () => {
 
   test("errors if no token is provided, or is empty", () => {
     try {
-      bootstrap(config({ token: "" }));
+      bootstrap(config({ onboardingUrl: "" }));
       throw new Error("THIS SHOULD HAVE THROWN");
     } catch (err) {
       expect(
-        (err as Error).message.includes("token parameter is required"),
+        (err as Error).message.includes("onboardingUrl parameter is required"),
       ).toBeTruthy();
     }
   });

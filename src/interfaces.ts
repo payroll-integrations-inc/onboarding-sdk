@@ -1,9 +1,9 @@
 export interface BootstrapConfig {
   /**
-   * Token retrieved from Payroll Integrations API
+   * Onboarding URL retrieved from Payroll Integrations API
    * See: URL_TODO
    */
-  token: string;
+  onboardingUrl: string;
   /**
    * CSS selector for the element to attach the SDK
    * frame. Defaults to `#pi-host`.
@@ -19,21 +19,13 @@ export interface BootstrapConfig {
    * https://secure.payrollintegrationsapp.com
    */
   frameHost?: string;
-  /**
-   * Override the default frame style
-   */
-  frameStyle?: {
-    zIndex?: string;
-    height?: string;
-    width?: string;
-    border?: string;
-  };
 }
 
-export interface WindowState {
+export interface SdkState {
   host?: HTMLElement;
   iframe?: HTMLIFrameElement;
   callbacks?: BootstrapConfig["callbacks"];
+  incomingMessageAbortController?: AbortController;
 }
 
 export type SdkMessageData = {
@@ -51,12 +43,13 @@ export type SdkMessageData = {
       type: "success";
       value: string;
     }
+  | {
+      type: "style";
+      value: {
+        height: string;
+        width: string;
+      };
+    }
 );
 
 export type SdkMessage = MessageEvent<SdkMessageData>;
-
-declare global {
-  interface Window {
-    __PAYROLL_INTEGRATIONS__: WindowState;
-  }
-}
