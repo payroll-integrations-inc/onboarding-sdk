@@ -107,8 +107,8 @@ export function bootstrap(config: BootstrapConfig) {
   iframe.src = getFrameSrc(frameHost);
   iframe.frameBorder = "0";
   iframe.style.zIndex = "900";
-  iframe.style.height = "600px";
-  iframe.style.width = "420px";
+  iframe.style.height = "626px";
+  iframe.style.width = "448px";
   iframe.style.border = "none";
   iframe.allow = "clipboard-write; clipboard-read";
   iframe.onload = () => {
@@ -118,7 +118,13 @@ export function bootstrap(config: BootstrapConfig) {
       type: "token",
       value: token,
     };
+    const styleMessage: SdkMessageData = {
+      source: OUTGOING_MESSAGE_SOURCE,
+      type: "style",
+      value: { height: "626px", width: "448px" },
+    };
     iframe.contentWindow?.postMessage(tokenMessage, frameHost);
+    iframe.contentWindow?.postMessage(styleMessage, frameHost);
   };
   host.append(iframe);
 }
