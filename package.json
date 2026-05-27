@@ -1,0 +1,33 @@
+{
+  "name": "@payroll-integrations/onboarding-sdk",
+  "author": "Payroll Integrations Inc.",
+  "private": false,
+  "version": "1.0.0-alpha.1",
+  "type": "module",
+  "packageManager": "pnpm@10.22.0",
+  "files": ["dist"],
+  "main": "./dist/onboarding-sdk.umd.cjs",
+  "module": "./dist/onboarding-sdk.js",
+  "exports": {
+    ".": {
+      "import": "./dist/onboarding-sdk.js",
+      "require": "./dist/onboarding-sdk.umd.cjs"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.2.4",
+    "@types/node": "^25.6.0",
+    "@vitest/coverage-v8": "^4.1.5",
+    "daisyui": "^5.5.19",
+    "jsdom": "^29.1.1",
+    "tailwindcss": "^4.2.4",
+    "typescript": "~6.0.2",
+    "vite": "^8.0.10",
+    "vitest": "^4.1.5"
+  }
+}
