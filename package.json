@@ -5,7 +5,9 @@
   "version": "1.0.0-alpha.1",
   "type": "module",
   "packageManager": "pnpm@10.22.0",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "./dist/onboarding-sdk.umd.cjs",
   "module": "./dist/onboarding-sdk.js",
   "exports": {
@@ -13,6 +15,10 @@
       "import": "./dist/onboarding-sdk.js",
       "require": "./dist/onboarding-sdk.umd.cjs"
     }
+  },
+  "engines": {
+    "node": ">=22.22.0 <23",
+    "pnpm": ">=10"
   },
   "scripts": {
     "dev": "vite",
