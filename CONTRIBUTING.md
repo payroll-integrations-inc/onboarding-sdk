@@ -50,6 +50,14 @@ pnpm build
 
 Output is written to [dist/](dist/). The library is built in both ES module (`onboarding-sdk.js`) and UMD (`onboarding-sdk.umd.cjs`) formats.
 
+## Releasing new versions
+
+To release a new version:
+
+1. Create a new commit updating the version in `package.json`, and merge it to development
+2. Create a PR merging development -> main
+3. Once merged, create a new tag of the format `vX.Y.Z` or `vW.X.Y-alpha.Z` that matches the version in `package.json`
+
 ## Commit Messages
 
 A git hook (`githooks/prepare-commit-msg`) automatically prepends the ticket ID from your branch name to each commit message. Branches should be named in the format `PI-1234` or `PI-1234-description`.
