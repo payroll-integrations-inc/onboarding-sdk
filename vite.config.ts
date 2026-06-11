@@ -1,6 +1,7 @@
 import type { UserConfig } from "vite";
 import { resolve } from "node:path";
 import tailwindcss from "@tailwindcss/vite";
+import dts from "unplugin-dts/vite";
 
 export default {
   build: {
@@ -13,7 +14,8 @@ export default {
       entry: resolve(import.meta.dirname, "src/main.js"),
       name: "OnboardingSDK",
       fileName: "onboarding-sdk",
+      formats: ["es", "umd"],
     },
   },
-  plugins: [tailwindcss()],
+  plugins: [tailwindcss(), dts({ exclude: ["src/testbed", "**.spec.ts"] })],
 } satisfies UserConfig;
