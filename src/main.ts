@@ -55,7 +55,7 @@ function throwError(message: string) {
 
 export function bootstrap(config: BootstrapConfig) {
   const {
-    onboardingUrl,
+    onboardingLink,
     selector = DEFAULT_HOST_ELEMENT_SELECTOR,
     frameHost = DEFAULT_ONBOARDING_HOST,
     callbacks,
@@ -63,12 +63,12 @@ export function bootstrap(config: BootstrapConfig) {
 
   sdkState.callbacks = callbacks;
 
-  if (!onboardingUrl) {
-    throwError("The onboardingUrl parameter is required!");
+  if (!onboardingLink) {
+    throwError("The onboardingLink parameter is required!");
     return;
   }
 
-  const params = new URL(onboardingUrl).searchParams;
+  const params = new URL(onboardingLink).searchParams;
   const token = params.get("token");
 
   if (!token) {
