@@ -21,6 +21,7 @@ runs:
               node-version-file: ${{ inputs.node-version-file }}
               cache: 'pnpm'
               cache-dependency-path: 'pnpm-lock.yaml'
+              registry-url: 'https://registry.npmjs.org/'
               # Caching mechanism:
               # - cache: 'pnpm' enables automatic caching of pnpm store (~/.pnpm-store)
               # - cache-dependency-path: Uses pnpm-lock.yaml hash for cache key

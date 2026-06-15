@@ -2,9 +2,9 @@
   "name": "@payroll-integrations/onboarding-sdk",
   "author": "Payroll Integrations Inc.",
   "private": false,
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.8",
   "type": "module",
-  "packageManager": "pnpm@10.22.0",
+  "packageManager": "pnpm@11.7.0",
   "files": [
     "dist"
   ],
@@ -19,12 +19,18 @@
   },
   "engines": {
     "node": ">=22.22.0 <23",
-    "pnpm": ">=10"
+    "pnpm": ">=11"
   },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "test": "vitest"
+  },
+  "repository": {
+    "url": "https://github.com/payroll-integrations-inc/onboarding-sdk"
+  },
+  "publishConfig": {
+    "provenance": false
   },
   "devDependencies": {
     "@tailwindcss/vite": "4.2.4",
