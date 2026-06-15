@@ -2,7 +2,7 @@
   "name": "@payroll-integrations/onboarding-sdk",
   "author": "Payroll Integrations Inc.",
   "private": false,
-  "version": "1.0.0-alpha.6",
+  "version": "1.0.0-alpha.7",
   "type": "module",
   "packageManager": "pnpm@10.22.0",
   "files": [
