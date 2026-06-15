@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
-          ref: ${{ github.event.ref }}
+          ref: main
       - name: Setup pnpm and Node.js
         uses: ./.github/actions/setup-pnpm-node
         with:
