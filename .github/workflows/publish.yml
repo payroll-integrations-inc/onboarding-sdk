@@ -11,6 +11,8 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.ref }}
       - name: Setup pnpm and Node.js
         uses: ./.github/actions/setup-pnpm-node
         with:
