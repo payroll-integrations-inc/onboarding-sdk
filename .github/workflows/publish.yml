@@ -19,4 +19,4 @@ jobs:
             node-version-file: ./package.json
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
-      - run: pnpm publish --provenance --access restricted
+      - run: pnpm publish --access restricted
