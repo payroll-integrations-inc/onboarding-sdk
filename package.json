@@ -2,9 +2,9 @@
   "name": "@payroll-integrations/onboarding-sdk",
   "author": "Payroll Integrations Inc.",
   "private": false,
-  "version": "1.0.0-alpha.7",
+  "version": "1.0.0-alpha.8",
   "type": "module",
-  "packageManager": "pnpm@10.22.0",
+  "packageManager": "pnpm@11.7.0",
   "files": [
     "dist"
   ],
@@ -19,7 +19,7 @@
   },
   "engines": {
     "node": ">=22.22.0 <23",
-    "pnpm": ">=10"
+    "pnpm": ">=11"
   },
   "scripts": {
     "dev": "vite",
