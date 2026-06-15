@@ -2,10 +2,13 @@
   "name": "@payroll-integrations/onboarding-sdk",
   "author": "Payroll Integrations Inc.",
   "private": false,
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "type": "module",
   "packageManager": "pnpm@10.22.0",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
+  "types": "./dist/src/main.d.ts",
   "main": "./dist/onboarding-sdk.umd.cjs",
   "module": "./dist/onboarding-sdk.js",
   "exports": {
@@ -14,20 +17,25 @@
       "require": "./dist/onboarding-sdk.umd.cjs"
     }
   },
+  "engines": {
+    "node": ">=22.22.0 <23",
+    "pnpm": ">=10"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "test": "vitest"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.2.4",
-    "@types/node": "^25.6.0",
-    "@vitest/coverage-v8": "^4.1.5",
-    "daisyui": "^5.5.19",
-    "jsdom": "^29.1.1",
-    "tailwindcss": "^4.2.4",
-    "typescript": "~6.0.2",
-    "vite": "^8.0.10",
-    "vitest": "^4.1.5"
+    "@tailwindcss/vite": "4.2.4",
+    "@types/node": "25.6.0",
+    "@vitest/coverage-v8": "4.1.5",
+    "daisyui": "5.5.19",
+    "jsdom": "29.1.1",
+    "tailwindcss": "4.2.4",
+    "typescript": "6.0.3",
+    "unplugin-dts": "1.0.2",
+    "vite": "8.0.10",
+    "vitest": "4.1.5"
   }
 }
