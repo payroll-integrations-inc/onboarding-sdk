@@ -3,7 +3,7 @@ export interface BootstrapConfig {
    * Onboarding URL retrieved from Payroll Integrations API
    * See: URL_TODO
    */
-  onboardingUrl: string;
+  onboardingLink: string;
   /**
    * CSS selector for the element to attach the SDK
    * frame. Defaults to `#pi-host`.

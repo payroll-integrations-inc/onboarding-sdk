@@ -1,68 +1,77 @@
 # Onboarding SDK
 
-A lightweight JavaScript SDK for embedding the [Payroll Integrations](https://payrollintegrationsapp.com) onboarding flow into your web application via an iframe.
+This guide is for developers working on the SDK itself. For usage instructions, see the [API docs repo](https://github.com/payroll-integrations-inc/api-docs/).
 
-## Overview
+## Prerequisites
 
-The SDK mounts a secure iframe into a host element on your page and handles two-way communication between your app and the Payroll Integrations platform using the `postMessage` API.
+- [Node.js](https://nodejs.org/) (LTS recommended)
+- [pnpm](https://pnpm.io/)
 
-## Installation
-
-> **Note:** This package has not yet been published. Installation instructions will be added once it is available.
-
-## Usage
-
-1. Add a host element to your page:
-
-```html
-<div id="pi-host"></div>
-```
-
-2. Call `bootstrap` with a token obtained from the Payroll Integrations API:
-
-```js
-import { bootstrap } from "onboarding-sdk";
-
-bootstrap({
-  token: "YOUR_API_TOKEN",
-  callbacks: {
-    success: (value) => console.log("Onboarding complete", value),
-    error: (value) => console.error("Onboarding error", value),
-  },
-});
-```
-
-## Configuration
-
-| Option | Type | Default | Description |
-|---|---|---|---|
-| `token` | `string` | **required** | Token retrieved from the Payroll Integrations API |
-| `selector` | `string` | `#pi-host` | CSS selector for the element to mount the iframe into |
-| `frameHost` | `string` | `https://secure.payrollintegrationsapp.com` | Override the iframe host URL |
-| `frameStyle.height` | `string` | `600px` | iframe height |
-| `frameStyle.width` | `string` | `400px` | iframe width |
-| `frameStyle.zIndex` | `string` | `900` | iframe z-index |
-| `frameStyle.border` | `string` | `none` | iframe border |
-| `callbacks.success` | `(value: string) => unknown` | — | Called when onboarding completes successfully |
-| `callbacks.error` | `(value: string) => unknown` | — | Called when an error occurs |
-| `callbacks.message` | `(value: any) => unknown` | — | Called for every outbound message sent to the iframe |
-
-## Development
+## Setup
 
 ```bash
-# Install dependencies
+git clone <repo-url>
+cd onboarding-sdk
 pnpm install
+```
 
-# Start dev server
+## Development & Testing
+
+Start the dev server to run the testbed app in your browser:
+
+```bash
 pnpm dev
+```
 
-# Run tests
+The testbed app lets you exercise the SDK against any backend environment. The available environments are defined in [src/testbed/constants.ts](src/testbed/constants.ts) and include local, qa, dev, demo, and prod targets.
+
+To test onboarding:
+
+1. Open the application at `http://localhost:5173/`
+2. In the environment dropdown, select the environment you are testing against
+3. In the URL field, paste a valid onboarding URL with its token parameter
+4. Click `Bootstrap`
+
+## Automated Tests
+
+Automated tests use [Vitest](https://vitest.dev/) with a jsdom environment. Coverage is collected automatically.
+
+```bash
 pnpm test
+```
 
-# Build for production
+Test files live alongside source files and are named `*.spec.ts`. The primary test suite is [src/main.spec.ts](src/main.spec.ts).
+
+## Building
+
+```bash
 pnpm build
 ```
 
-## License
+Output is written to [dist/](dist/). The library is built in both ES module (`onboarding-sdk.js`) and UMD (`onboarding-sdk.umd.cjs`) formats.
 
-Copyright © Payroll Integrations Inc. All rights reserved.
+## Releasing new versions
+
+To release a new version:
+
+1. Create a new commit updating the version in `package.json`, and merge it to development
+2. Create a PR merging development -> main
+3. Once merged, create a new tag of the format `vX.Y.Z` or `vW.X.Y-alpha.Z` that matches the version in `package.json`
+
+## Commit Messages
+
+A git hook (`githooks/prepare-commit-msg`) automatically prepends the ticket ID from your branch name to each commit message. Branches should be named in the format `PI-1234` or `PI-1234-description`.
+
+> The hook is marked deprecated — conventional commits format (`feat: description`, `fix: description`) is preferred going forward.
+
+## Project Structure
+
+| Path | Purpose |
+|---|---|
+| `src/main.ts` | SDK entry point — exports `bootstrap` |
+| `src/interfaces.ts` | TypeScript types and interfaces |
+| `src/constants.ts` | Default values (host URL, selectors, message source) |
+| `src/main.spec.ts` | Unit tests |
+| `src/testbed/` | Local dev app for manual testing |
+| `dist/` | Build output (not committed) |
+| `githooks/` | Git hooks installed via `prepare` script |
