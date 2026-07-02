@@ -1,0 +1,37 @@
+name: Claude Code Review
+
+# Thin caller. The review logic, scripts, and default prompt live in pi-cd
+# (consolidated in PI-14281); this repo just invokes the reusable workflow and
+# inherits ANTHROPIC_API_KEY (an org secret available to all private/internal
+# repos). To customize the review, add .claude/prompts/code-review.prompt.md
+# and pass it via a `prompt-path` input.
+on:
+    pull_request:
+        types: [opened, synchronize]
+    workflow_dispatch:
+        inputs:
+            pr-number:
+                description: 'PR number to review'
+                required: true
+                type: string
+
+# Rate limiting for cost control
+concurrency:
+    group: claude-review-${{ github.event.pull_request.number || inputs.pr-number }}
+    cancel-in-progress: false
+
+# Grant the token scopes the reusable workflow's jobs request; a reusable
+# workflow can only downgrade from what the caller grants, never raise it.
+permissions:
+    contents: read
+    pull-requests: write
+    issues: write
+    id-token: write
+    actions: read
+
+jobs:
+    review:
+        uses: payroll-integrations-inc/pi-cd/.github/workflows/claude-code-review.yml@claude-code-review/v1
+        with:
+            pr-number: ${{ inputs.pr-number }}
+        secrets: inherit
