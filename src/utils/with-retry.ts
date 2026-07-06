@@ -1,5 +1,5 @@
 /**
- * Retries an async operation with a fixed delay between attempts.
+ * Retries a failing async operation with a fixed delay between attempts.
  *
  * NOTE: this file exists only to exercise the Claude Code Review workflow on a
  * dummy PR — it is not wired into the SDK and the PR adding it must not merge.
