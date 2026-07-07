@@ -2,6 +2,7 @@
   "name": "@payroll-integrations/onboarding-sdk",
   "author": "Payroll Integrations Inc.",
   "private": false,
+  "license": "MIT",
   "version": "1.0.0",
   "type": "module",
   "packageManager": "pnpm@11.7.0",
