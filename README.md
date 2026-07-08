@@ -1,6 +1,6 @@
 # Onboarding SDK
 
-This guide is for developers working on the SDK itself. For usage instructions, see the [API docs repo](https://github.com/payroll-integrations-inc/api-docs/).
+This guide is for developers working on the SDK itself. For usage instructions, see the [API docs](https://developer.payrollintegrations.com/sdk/usage).
 
 ## Prerequisites
 

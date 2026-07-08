@@ -2,7 +2,8 @@
   "name": "@payroll-integrations/onboarding-sdk",
   "author": "Payroll Integrations Inc.",
   "private": false,
-  "version": "1.0.0-alpha.8",
+  "license": "MIT",
+  "version": "1.0.0",
   "type": "module",
   "packageManager": "pnpm@11.7.0",
   "files": [
@@ -41,7 +42,7 @@
     "tailwindcss": "4.2.4",
     "typescript": "6.0.3",
     "unplugin-dts": "1.0.2",
-    "vite": "8.0.10",
+    "vite": "8.1.3",
     "vitest": "4.1.5"
   }
 }
